@@ -14,6 +14,10 @@ class GetShipmentController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return true;
+  }
+
   public path = (): string => {
     return "/shipments/:trackingNumber";
   }
@@ -27,7 +31,7 @@ class GetShipmentController implements Controller {
       }
 
       const shipmentRepository = AppDataSource.getRepository(Shipment);
-      const result = await shipmentRepository.find(
+      const result = await shipmentRepository.findOne(
         {
           where: { tracking_number: trackingNumber },
           select: {

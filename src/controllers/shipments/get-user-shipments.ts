@@ -14,6 +14,10 @@ class GetUserShipmentsController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return false;
+  }
+
   public path = (): string => {
     return "/shipments/user-shipments/:userId";
   }

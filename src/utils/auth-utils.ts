@@ -1,8 +1,6 @@
 import { sign } from 'jsonwebtoken';
 import { hashSync, compareSync } from 'bcrypt';
 
-const { JWT_SECRET = "" } = process.env;
-
 export const encryptPassword = (password: string) => {
   return hashSync(password, 12);
 }

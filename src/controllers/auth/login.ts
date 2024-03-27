@@ -15,6 +15,10 @@ class LoginController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return true;
+  }
+
   public path = (): string => {
     return '/authenticate';
   }

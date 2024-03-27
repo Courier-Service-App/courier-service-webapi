@@ -14,12 +14,16 @@ class UpdateShipmentController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return false;
+  }
+
   public path = (): string => {
     return "/shipments/:shipmentId";
   }
 
   public handler = async (req: Request, res: Response): Promise<void> => {
-    const { senderName, senderAddress, recipientName, recipientAddress, details, status } = req.body;
+    const { sender_name, sender_address, recipient_name, recipient_address, details, status } = req.body;
     const { shipmentId } = req.params;
     try {
       if (!shipmentId) {
@@ -28,10 +32,10 @@ class UpdateShipmentController implements Controller {
       }
 
       const shipment = new Shipment();
-      shipment.sender_name = senderName;
-      shipment.sender_address = senderAddress;
-      shipment.recipient_name = recipientName;
-      shipment.recipient_address = recipientAddress;
+      shipment.sender_name = sender_name;
+      shipment.sender_address = sender_address;
+      shipment.recipient_name = recipient_name;
+      shipment.recipient_address = recipient_address;
       shipment.details = details;
       shipment.status = status;
 

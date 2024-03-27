@@ -15,6 +15,10 @@ class CreateUserController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return false;
+  }
+
   public path = (): string => {
     return "/users/create-user";
   }

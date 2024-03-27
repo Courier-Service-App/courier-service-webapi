@@ -11,6 +11,10 @@ class CreateShipmentController implements Controller {
   }
 
   public isPrivate = (): boolean => {
+    return true;
+  }
+
+  public isOpen = (): boolean => {
     return false;
   }
 

@@ -4,6 +4,7 @@ import { HttpMethodType } from "../types/common";
 interface Controller {
   method(): HttpMethodType;
   isPrivate(): boolean;
+  isOpen(): boolean;
   path(): string;
   handler(
     req: Request,

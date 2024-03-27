@@ -14,6 +14,10 @@ class GetAllUsersController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return false;
+  }
+
   public path = (): string => {
     return "/users/all-users";
   }

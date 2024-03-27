@@ -14,6 +14,10 @@ class GetAllShipmentsController implements Controller {
     return false;
   }
 
+  public isOpen = (): boolean => {
+    return false;
+  }
+
   public path = (): string => {
     return "/shipments/all-shipments";
   }
