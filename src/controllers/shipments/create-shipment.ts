@@ -11,7 +11,7 @@ class CreateShipmentController implements Controller {
   }
 
   public isPrivate = (): boolean => {
-    return true;
+    return false;
   }
 
   public isOpen = (): boolean => {
@@ -24,7 +24,7 @@ class CreateShipmentController implements Controller {
 
   public handler = async (req: Request, res: Response): Promise<void> => {
     const { senderName, senderAddress, recipientName, recipientAddress, details, status, userId } = req.body;
-    try {
+        try {
       const trackingNumber = Math.floor(Math.random()*9000000) + 1000000;
       const shipment = new Shipment();
       shipment.tracking_number = trackingNumber.toString();

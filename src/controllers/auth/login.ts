@@ -52,6 +52,7 @@ class LoginController implements Controller {
             res, 
             { 
               message: "Login successful",
+              role: user.type,
               token 
             });
         }

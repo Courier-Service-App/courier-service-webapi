@@ -4,11 +4,10 @@ import { HttpMethodType } from '../../types/common';
 import { User } from '../../entity/User';
 import { AppDataSource } from '../../data-source';
 import { errorResponse, successResponse } from '../../utils/api-utils';
-import { encryptPassword } from '../../utils/auth-utils';
 
-class CreateUserController implements Controller {
+class GetUserController implements Controller {
   public method = (): HttpMethodType => {
-    return "post";
+    return "get";
   }
 
   public isPrivate = (): boolean => {
@@ -16,37 +15,40 @@ class CreateUserController implements Controller {
   }
 
   public isOpen = (): boolean => {
-    return true;
+    return false;
   }
 
   public path = (): string => {
-    return "/users/create-user";
+    return "/users/:userId";
   }
 
   public handler = async (req: Request, res: Response): Promise<void> => {
-    const { email, password, firstName, lastName, address, phone, type } = req.body;
+    const { userId } = req.params;
     try {
-      const user = new User();
-      user.first_name = firstName;
-      user.last_name = lastName;
-      user.email = email;
-      user.address = address;
-      user.phone = phone;
-      user.password = encryptPassword(password);
-
-      if (type) {
-        user.type = type;
+      if (!userId) {
+        errorResponse(res, { message: "userId is required" });
+        return;
       }
-
       const userRepository = AppDataSource.getRepository(User);
-      const { user_id } = await userRepository.save(user);
-      successResponse(res, { id: user_id });
+      const result = await userRepository.findOne(
+        { 
+          where: { user_id: userId },
+          select: {
+            first_name: true,
+            last_name: true,
+            email: true,
+            address: true,
+            phone: true,
+          }
+        });
+      successResponse(res, result);
     }
     catch(error: any) {
       console.error(error);
       errorResponse(res, { code: error.code, message: error.detail });
     }
   }
+
 }
 
-export default CreateUserController;
+export default GetUserController;
