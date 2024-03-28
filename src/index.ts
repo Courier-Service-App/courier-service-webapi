@@ -1,14 +1,9 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
-import path from 'path';
 import cors from 'cors';
 import router from './routes';
 import { AppDataSource } from './data-source';
 
-dotenv.config({
-  path: path.join(__dirname, '..', '/.env')
-});
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 const app: Express = express();
